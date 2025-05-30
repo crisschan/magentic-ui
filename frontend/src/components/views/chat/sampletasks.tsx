@@ -5,12 +5,12 @@ interface SampleTasksProps {
 }
 
 const SAMPLE_TASKS = [
-  "When does the post office near me close today?",
-  "Find the latest publications from the the Microsoft Research AI Frontiers Lab on Human-Agent interaction",
-  "Which commit of Microsoft/markitdown repo introduced MCP support?",
-  "Can you make a Markdown file with python that summarizes the Microsoft AutoGen repo?",
-  "Order me a custom pizza from Tangle Town Pub with sausage, pineapple, and black olives",
-  "Search arXiv for the latest papers on computer use agents",
+  "我家附近的邮局今天什么时候关门？",
+  "查找微软研究院AI前沿实验室关于人机交互的最新出版物",
+  "Microsoft/markitdown 仓库的哪个提交引入了MCP支持？",
+  "你能用Python创建一个Markdown文件来总结微软AutoGen仓库吗？",
+  "从Tangle Town Pub为我订一个定制披萨，配料包括香肠、菠萝和黑橄榄",
+  "在arXiv上搜索关于计算机用户代理的最新论文",
 ];
 
 const SampleTasks: React.FC<SampleTasksProps> = ({ onSelect }) => {
@@ -39,7 +39,7 @@ const SampleTasks: React.FC<SampleTasksProps> = ({ onSelect }) => {
   return (
     <div className="mb-6">
       <div className="mt-4 mb-2 text-sm opacity-70 text-secondary">
-        or try a sample task from below{" "}
+        或尝试以下示例任务 {/* Translated */}
       </div>
       <div className="flex flex-col gap-2 w-full">
         <div className="inline-flex flex-wrap justify-center gap-2 w-full">
@@ -60,7 +60,7 @@ const SampleTasks: React.FC<SampleTasksProps> = ({ onSelect }) => {
             onClick={() => setIsExpanded(!isExpanded)}
             type="button"
           >
-            {isExpanded ? "Show less..." : "Show more sample tasks..."}
+            {isExpanded ? "显示更少…" : "显示更多示例任务…"}
           </button>
         )}
       </div>

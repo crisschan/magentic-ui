@@ -119,7 +119,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   : "cursor-pointer hover:bg-tertiary"
               } ${
                 currentSession?.id === s.id
-                  ? " border-l-2 border-magenta-800 bg-secondary"
+                  ? " border-l-2 border-[var(--color-border-accent)] bg-secondary" // Use theme accent border
                   : ""
               }`}
               onClick={() => !isLoading && onSelectSession(s)}
@@ -148,7 +148,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         }}
                       >
                         <Edit className="w-4 h-4 inline-block mr-1.5 -mt-0.5" />{" "}
-                        Edit
+                        编辑 {/* Translated */}
                       </Menu.Item>
                       <Menu.Item
                         key="stop"
@@ -160,7 +160,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         danger
                       >
                         <StopCircle className="w-4 h-4 inline-block mr-1.5 -mt-0.5" />{" "}
-                        Disconnect
+                        断开连接 {/* Translated */}
                       </Menu.Item>
                       <Menu.Item
                         key="delete"
@@ -171,7 +171,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         danger
                       >
                         <Trash2 className="w-4 h-4 inline-block mr-1.5 -mt-0.5" />{" "}
-                        Delete
+                        删除 {/* Translated */}
                       </Menu.Item>
                       <Menu.Item
                         key="learn-plan"
@@ -214,12 +214,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
             items={[
               {
                 id: "current_session",
-                label: "Current Session",
+                label: "当前会话", // Translated
                 icon: <FileText className="w-4 h-4" />,
               },
               {
                 id: "saved_plan",
-                label: "Saved Plans",
+                label: "已保存的计划", // Translated
                 icon: <Archive className="w-4 h-4" />,
               },
             ]}
@@ -232,11 +232,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <>
             <div className="flex items-center justify-between py-2 border-secondary">
               <div className="flex items-center gap-2">
-                <span className="text-primary font-medium">Sessions</span>
+                <span className="text-primary font-medium">会话</span> {/* Translated */}
 
                 {isLoading ? (
                   <div className="py-2 flex text-sm text-secondary">
-                    Loading...{" "}
+                    加载中…{" "} {/* Translated */}
                     <RefreshCcw className="w-4 h-4 inline-block ml-2 animate-spin" />
                   </div>
                 ) : (
@@ -249,7 +249,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
             <div className="my-4 flex text-sm">
               <div className="mr-2 w-full">
-                <Tooltip title="Create new session">
+                <Tooltip title="创建新会话"> {/* Translated */}
                   <Button
                     className="w-full"
                     variant="primary"
@@ -258,7 +258,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     onClick={() => onEditSession()}
                     disabled={isLoading}
                   >
-                    New Session
+                    新建会话 {/* Translated */}
                   </Button>
                 </Tooltip>
               </div>
@@ -266,22 +266,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
             <div className="overflow-y-auto h-[calc(100%-200px)] scroll">
               {sortedSessions.length === 0 ? (
-                <div className="p-2 mr-2 text-center text-secondary text-sm border border-dashed rounded">
+                <div className="p-2 mr-2 text-center text-secondary text-sm border border-dashed border-[var(--color-border-secondary)] rounded"> {/* Use theme border */}
                   <InfoIcon className="w-4 h-4 inline-block mr-1.5 -mt-0.5" />
-                  No recent sessions found
+                  未找到最近的会话 {/* Translated */}
                 </div>
               ) : (
                 <>
                   {groupedSessions.today.length > 0 && (
                     <div>
-                      <div className="py-2 text-sm text-secondary">Today</div>
+                      <div className="py-2 text-sm text-secondary">今天</div> {/* Translated */}
                       {renderSessionGroup(groupedSessions.today)}
                     </div>
                   )}
                   {groupedSessions.yesterday.length > 0 && (
                     <div>
                       <div className="py-2 text-sm text-secondary">
-                        Yesterday
+                        昨天 {/* Translated */}
                       </div>
                       {renderSessionGroup(groupedSessions.yesterday)}
                     </div>
@@ -289,7 +289,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   {groupedSessions.last7Days.length > 0 && (
                     <div>
                       <div className="py-2 text-sm text-secondary">
-                        Last 7 Days
+                        最近7天 {/* Translated */}
                       </div>
                       {renderSessionGroup(groupedSessions.last7Days)}
                     </div>
@@ -297,14 +297,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   {groupedSessions.last30Days.length > 0 && (
                     <div>
                       <div className="py-2 text-sm text-secondary">
-                        Last 30 Days
+                        最近30天 {/* Translated */}
                       </div>
                       {renderSessionGroup(groupedSessions.last30Days)}
                     </div>
                   )}
                   {groupedSessions.older.length > 0 && (
                     <div>
-                      <div className="py-2 text-sm text-secondary">Older</div>
+                      <div className="py-2 text-sm text-secondary">更早</div> {/* Translated */}
                       {renderSessionGroup(groupedSessions.older)}
                     </div>
                   )}

@@ -24,7 +24,7 @@ export const getStatusIcon = (
             size={20}
             className="inline-block mr-1 text-accent animate-spin"
           />
-          <span className="inline-block mr-2 ml-1 ">Processing</span>
+          <span className="inline-block mr-2 ml-1 ">处理中</span>
         </div>
       );
     case "awaiting_input":
@@ -36,8 +36,8 @@ export const getStatusIcon = (
             <div>
               <div className="flex items-center">
                 <span>
-                  <span className="font-semibold">Approval Request:</span>{" "}
-                  {inputRequest.prompt || "Waiting for approval"}
+                  <span className="font-semibold">审批请求：</span>{" "}
+                  {inputRequest.prompt || "等待批准"}
                 </span>
               </div>
             </div>
@@ -47,7 +47,7 @@ export const getStatusIcon = (
                 size={20}
                 className="flex-shrink-0 mr-2 text-accent"
               />
-              <span className="flex-1">Waiting for your input</span>
+              <span className="flex-1">等待您的输入</span>
             </>
           )}
         </div>
@@ -55,22 +55,22 @@ export const getStatusIcon = (
     case "complete":
       return (
         <div className="text-sm mb-2">
-          <AlertTriangle size={20} className="inline-block mr-2 text-red-500" />
-          {errorMessage || "An error occurred"}
+          <AlertTriangle size={20} className="inline-block mr-2 text-[var(--color-warning-primary)]" /> {/* Theme warning color */}
+          {errorMessage || "发生错误"}
         </div>
       );
     case "error":
       return (
         <div className="text-sm mb-2">
-          <AlertTriangle size={20} className="inline-block mr-2 text-red-500" />
-          {errorMessage || "An error occurred"}
+          <AlertTriangle size={20} className="inline-block mr-2 text-[var(--color-warning-primary)]" /> {/* Theme warning color */}
+          {errorMessage || "发生错误"}
         </div>
       );
     case "stopped":
       return (
         <div className="text-sm mb-2 mt-4">
-          <StopCircle size={20} className="inline-block mr-2 text-red-500" />
-          Task was stopped: {stopReason}
+          <StopCircle size={20} className="inline-block mr-2 text-[var(--color-warning-primary)]" /> {/* Theme warning color */}
+          任务已停止：{stopReason}
         </div>
       );
     case "pausing":
@@ -80,14 +80,14 @@ export const getStatusIcon = (
             size={20}
             className="inline-block mr-2 text-accent animate-spin"
           />
-          <span className="inline-block mr-2 ml-1">Pausing</span>
+          <span className="inline-block mr-2 ml-1">暂停中</span>
         </div>
       );
     case "paused":
       return (
         <div className="text-sm mb-2">
           <PauseCircle size={20} className="inline-block mr-2 text-accent" />
-          <span className="inline-block mr-2 ml-1">Paused</span>
+          <span className="inline-block mr-2 ml-1">已暂停</span>
         </div>
       );
     case "resuming":
@@ -97,7 +97,7 @@ export const getStatusIcon = (
             size={20}
             className="inline-block mr-2 text-accent animate-spin"
           />
-          <span className="inline-block mr-2 ml-1">Resuming</span>
+          <span className="inline-block mr-2 ml-1">恢复中</span>
         </div>
       );
     default:
@@ -111,13 +111,13 @@ export const SessionRunStatusIndicator: React.FC<{
 }> = ({ status }) => {
   switch (status) {
     case "awaiting_input":
-      return <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />;
+      return <div className="w-2 h-2 rounded-full bg-[var(--color-bg-accent)] animate-pulse" />; {/* Theme accent color */}
     case "active":
       return <Loader2 className="w-3 h-3 animate-spin text-accent" />;
     case "final_answer_awaiting_input":
-      return <CheckCircle className="w-3 h-3 text-green-500" />;
+      return <CheckCircle className="w-3 h-3 text-green-500" />; // Standard green for success
     case "error":
-      return <AlertTriangle className="w-3 h-3 text-red-500" />;
+      return <AlertTriangle className="w-3 h-3 text-[var(--color-warning-primary)]" />; {/* Theme warning color */}
     default:
       return null;
   }

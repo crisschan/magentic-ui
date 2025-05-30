@@ -21,24 +21,23 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
       {/* This container controls the position */}
       <div className="w-[22vw] ml-[10vw] pointer-events-none">
         <div className="feedback-form w-full max-w-md pointer-events-auto">
-          <div className="bg-tertiary rounded-lg shadow-lg p-6">
+          <div className="bg-tertiary rounded-lg p-6"> {/* Removed shadow-lg */}
             <div className="flex justify-center mb-4">
-              <div className="p-2 rounded-full bg-blue-700">
-                <EyeOff className="text-blue-800 w-8 h-8" />
+              <div className="p-2 rounded-full bg-[var(--color-bg-accent)]"> {/* Use theme accent color */}
+                <EyeOff className="text-white w-8 h-8" /> {/* Use contrasting text color */}
               </div>
             </div>
             <h3 className="text-lg font-medium text-primary mb-4 text-center">
-              Magentic-UI can't see what you do when you take control.
+              当您接管控制时，Magentic-UI无法看到您的操作。
             </h3>
             <p className="text-base mb-4 text-primary">
-              Please describe what you did when you are ready to hand back
-              control:
+              当您准备交还控制权时，请描述您做了什么：
             </p>
 
             <TextArea
               value={userFeedback}
               onChange={(e) => setUserFeedback(e.target.value)}
-              placeholder="For example: I entered my zip code, I clicked on the top link..."
+              placeholder="例如：我输入了我的邮政编码，我点击了顶部的链接…"
               autoSize={{ minRows: 5, maxRows: 8 }}
               className="w-full text-primary placeholder:text-secondary"
             />
@@ -49,9 +48,9 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
                 size="md"
                 fullWidth
                 onClick={onSubmit}
-                className="font-medium shadow-md"
+                className="font-medium" // Removed shadow-md
               >
-                Give control back to Magentic-UI
+                将控制权交还给Magentic-UI
               </Button>
             </div>
           </div>

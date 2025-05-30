@@ -45,8 +45,8 @@ export default function ProgressBar({
       {isPlanning ? (
         <div className="flex justify-center w-full">
           <div className="w-full max-w-xs px-4 py-2">
-            <div className="text-sm text-gray-500 mt-1 text-center font-medium">
-              Planning...
+            <div className="text-sm text-[var(--color-text-secondary)] mt-1 text-center font-medium"> {/* Theme color */}
+              规划中…
             </div>
           </div>
         </div>
@@ -56,11 +56,11 @@ export default function ProgressBar({
             <div className="w-full px-4 py-2">
               <div className="relative w-full">
                 {/* Progress bar */}
-                <div className="w-full bg-gray-200 rounded-full h-1 dark:bg-gray-700">
+                <div className="w-full bg-[var(--color-border-primary)] rounded-full h-1 dark:bg-[var(--color-border-primary)]"> {/* Theme color */}
                   <div className="relative w-full h-full">
                     {/* Completed section - full width when hasFinalAnswer */}
                     <div
-                      className="absolute bg-green-600 h-1 rounded-full transition-all duration-300"
+                      className="absolute bg-green-600 h-1 rounded-full transition-all duration-300" // Green for completed is fine
                       style={{
                         width: hasFinalAnswer
                           ? "100%"
@@ -74,7 +74,7 @@ export default function ProgressBar({
                     {/* Current section - hidden when hasFinalAnswer */}
                     {!hasFinalAnswer && (
                       <div
-                        className="absolute bg-magenta-800 h-1 transition-all duration-300"
+                        className="absolute bg-[var(--color-bg-accent)] h-1 transition-all duration-300" // Theme accent color
                         style={{
                           left: `${
                             (adjustedProgress.currentStep /
@@ -88,7 +88,7 @@ export default function ProgressBar({
                     {/* Remaining section - hidden when hasFinalAnswer */}
                     {!hasFinalAnswer && (
                       <div
-                        className="absolute bg-gray-300 h-1 rounded-r-full transition-all duration-300"
+                        className="absolute bg-[var(--color-border-secondary)] h-1 rounded-r-full transition-all duration-300" // Theme color
                         style={{
                           left: `${
                             ((adjustedProgress.currentStep + 1) /
@@ -120,12 +120,12 @@ export default function ProgressBar({
                       const tooltipContent = step ? (
                         <div>
                           <div className="font-medium">
-                            Step {index + 1}: {step.title}
+                            步骤 {index + 1}：{step.title}
                           </div>
                           <div className="text-xs mt-1">{step.details}</div>
                         </div>
                       ) : (
-                        `Step ${index + 1}`
+                        `步骤 ${index + 1}`
                       );
 
                       return (
@@ -164,12 +164,12 @@ export default function ProgressBar({
                       const tooltipContent = step ? (
                         <div>
                           <div className="font-medium">
-                            Step {index + 1}: {step.title}
+                            步骤 {index + 1}：{step.title}
                           </div>
                           <div className="text-xs mt-1">{step.details}</div>
                         </div>
                       ) : (
-                        `Step ${index + 1}`
+                        `步骤 ${index + 1}`
                       );
 
                       return (
@@ -194,10 +194,10 @@ export default function ProgressBar({
                               ${
                                 hasFinalAnswer ||
                                 index < adjustedProgress.currentStep
-                                  ? "bg-green-600 text-white"
+                                  ? "bg-green-600 text-white" // Green for completed is fine
                                   : index === adjustedProgress.currentStep
-                                  ? "bg-magenta-800 text-white"
-                                  : "bg-gray-400 text-white"
+                                  ? "bg-[var(--color-bg-accent)] text-white" // Theme accent color
+                                  : "bg-[var(--color-text-secondary)] text-white" // Theme text-secondary for upcoming
                               }`}
                             >
                               {hasFinalAnswer ||
@@ -219,30 +219,30 @@ export default function ProgressBar({
                 </div>
 
                 {/* Status text */}
-                <div className="text-sm text-gray-500 mt-5 text-center">
+                <div className="text-sm text-[var(--color-text-secondary)] mt-5 text-center"> {/* Theme color */}
                   {hasFinalAnswer ? (
-                    <span className="text-green-600 font-medium">
-                      Task Completed
+                    <span className="text-green-600 font-medium"> {/* Green for completed is fine */}
+                      任务已完成
                     </span>
                   ) : adjustedProgress.plan?.task ? (
                     <span>
-                      Step {adjustedProgress.currentStep + 1} of{" "}
+                      步骤 {adjustedProgress.currentStep + 1} / {" "}
                       {adjustedProgress.totalSteps}
                       {adjustedProgress.plan?.steps[
                         adjustedProgress.currentStep
                       ]?.title &&
-                        `: ${adjustedProgress.plan.steps[
+                        `：${adjustedProgress.plan.steps[
                           adjustedProgress.currentStep
                         ].title.substring(0, 30)}...`}
                     </span>
                   ) : (
                     <span>
-                      Step {adjustedProgress.currentStep + 1} of{" "}
+                      步骤 {adjustedProgress.currentStep + 1} / {" "}
                       {adjustedProgress.totalSteps}
                       {adjustedProgress.plan?.steps[
                         adjustedProgress.currentStep
                       ]?.title &&
-                        `: ${adjustedProgress.plan.steps[
+                        `：${adjustedProgress.plan.steps[
                           adjustedProgress.currentStep
                         ].title.substring(0, 30)}...`}
                     </span>

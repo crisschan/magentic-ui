@@ -48,16 +48,16 @@ export const Button: React.FC<ButtonProps> = ({
   // Variant classes - these would use your color variables
   const variantClasses = {
     primary:
-      "bg-magenta-800 text-white hover:bg-magenta-900 focus:ring-2 focus:ring-magenta-900",
+      "bg-[var(--color-bg-accent)] text-white hover:brightness-90 focus:ring-2 focus:ring-[var(--color-bg-accent)]", // Changed text to white for better contrast
     secondary:
-      "bg-transparent border border-magenta-800 text-magenta-800 hover:bg-magenta-900/50",
-    tertiary: "bg-transparent text-gray-800 hover:text-primary",
+      "bg-transparent border border-[var(--color-bg-accent)] text-[var(--color-bg-accent)] hover:bg-[var(--color-bg-accent)] hover:text-white hover:bg-opacity-10 dark:hover:bg-opacity-20", // Changed hover text to white
+    tertiary: "bg-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]",
     success:
-      "bg-green-600 text-white hover:bg-green-700 focus:ring-2 focus:ring-green-400",
+      "bg-green-600 text-white hover:bg-green-700 focus:ring-2 focus:ring-green-400", // Assuming green is a semantic color, not theme-dependent for this button type
     warning:
-      "bg-warning-primary text-white hover:bg-amber-600 focus:ring-2 focus:ring-amber-400",
+      "bg-[var(--color-warning-primary)] text-white hover:brightness-90 focus:ring-2 focus:ring-[var(--color-warning-primary)]",
     danger:
-      "bg-red-600 text-white hover:bg-red-700 focus:ring-2 focus:ring-red-400",
+      "bg-red-600 text-white hover:bg-red-700 focus:ring-2 focus:ring-red-400", // Assuming red is a semantic color
   };
 
   // States

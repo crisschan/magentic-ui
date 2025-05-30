@@ -43,7 +43,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
         return;
       }
 
-      if (window.confirm(`Are you sure you want to delete "${plan.task}"?`)) {
+      if (window.confirm(`您确定要删除 "${plan.task}"？`)) {
         await planAPI.deletePlan(plan.id, plan.user_id);
 
         if (onDeletePlan) {
@@ -162,26 +162,26 @@ const PlanCard: React.FC<PlanCardProps> = ({
           <div className="flex justify-between items-center">
             <span
               className="truncate max-w-[80%]"
-              title={plan.task || "Untitled Plan"}
+              title={plan.task || "未命名计划"}
             >
-              {plan.task || "Untitled Plan"}
+              {plan.task || "未命名计划"}
             </span>
             {isHovering && (
               <div className="flex items-center ml-2">
-                <Tooltip title="Export plan as JSON file">
+                <Tooltip title="将计划导出为JSON文件">
                   <button
                     className="bg-transparent border-none cursor-pointer mr-2"
                     onClick={handleExport}
-                    aria-label="Export plan"
+                    aria-label="导出计划"
                   >
                     <Download className="h-5 w-5 transition-colors" />
                   </button>
                 </Tooltip>
-                <Tooltip title="Delete this plan">
+                <Tooltip title="删除此计划">
                   <button
                     className="bg-transparent border-none cursor-pointer"
                     onClick={handleDelete}
-                    aria-label="Delete plan"
+                    aria-label="删除计划"
                   >
                     <Trash2 className="h-5 w-5 transition-colors" />
                   </button>
@@ -190,12 +190,12 @@ const PlanCard: React.FC<PlanCardProps> = ({
             )}
           </div>
         }
-        className="shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col"
+        className="flex flex-col transition-colors duration-200 border border-[var(--color-border-primary)] hover:border-[var(--color-border-accent)]" // Removed shadows, added border hover
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
         actions={[
           <div key="use" className="flex items-center justify-center h-full">
-            <Tooltip title="Create a new session with this plan loaded">
+            <Tooltip title="使用此计划加载创建一个新会话">
               <Button
                 type="text"
                 className="cursor-pointer flex items-center justify-center font-semibold transition-colors"
@@ -204,19 +204,19 @@ const PlanCard: React.FC<PlanCardProps> = ({
                 }}
               >
                 <PlayCircle className="h-4 w-4 mr-1" />
-                Run Plan
+                运行计划
               </Button>
             </Tooltip>
           </div>,
           <div key="edit" className="flex items-center justify-center h-full">
-            <Tooltip title="Modify plan title and steps">
+            <Tooltip title="修改计划标题和步骤">
               <Button
                 type="text"
                 className="cursor-pointer flex items-center justify-center font-semibold transition-colors"
                 onClick={handleEdit}
               >
                 <Edit2 className="h-4 w-4 mr-1" />
-                Edit
+                编辑
               </Button>
             </Tooltip>
           </div>,
@@ -225,21 +225,21 @@ const PlanCard: React.FC<PlanCardProps> = ({
         <div className="flex flex-col flex-grow justify-between">
           <div>
             <div className="mb-4">
-              <p className="text-sm">{steps.length} steps</p>
+              <p className="text-sm">{steps.length} 个步骤</p>
             </div>
 
             <div className="space-y-2 min-h-[80px]">
               {steps.slice(0, 3).map((step, idx) => (
                 <div
                   key={idx}
-                  className="text-xs border-l-2 border-gray-200 pl-2"
+                  className="text-xs border-l-2 border-[var(--color-border-secondary)] pl-2" // Use theme border color
                 >
-                  {step.title || `Step ${idx + 1}`}
+                  {step.title || `步骤 ${idx + 1}`}
                 </div>
               ))}
               {steps.length > 3 && (
                 <div className="text-xs">
-                  + {steps.length - 3} more steps
+                  + {steps.length - 3} 个更多步骤
                 </div>
               )}
             </div>
@@ -269,14 +269,14 @@ const PlanCard: React.FC<PlanCardProps> = ({
           <div>
             <div className="mb-4">
               <label className="block text-sm font-medium mb-1">
-                Plan Title
+                计划标题
               </label>
               <Input
                 type="text"
                 value={localTask}
                 onChange={(e) => setLocalTask(e.target.value)}
                 onPressEnter={() => handleSavePlan(localSteps, false)}
-                placeholder="Enter plan title"
+                placeholder="输入计划标题"
               />
             </div>
             <PlanView

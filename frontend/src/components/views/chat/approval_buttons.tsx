@@ -38,7 +38,7 @@ const ApprovalButtons: React.FC<ApprovalButtonsProps> = ({
             className="bg-green-500 hover:bg-green-600 text-white rounded flex justify-center items-center px-2 py-1.5 transition duration-300"
           >
             <CheckCircle className="h-5 w-5 mr-1" />
-            <span className="text-sm mr-1">Approve</span>
+            <span className="text-sm mr-1">批准</span>
           </button>
           <button
             type="button"
@@ -46,7 +46,7 @@ const ApprovalButtons: React.FC<ApprovalButtonsProps> = ({
             className="bg-red-500 hover:bg-red-600 text-white rounded flex justify-center items-center px-2 py-1.5 transition duration-300"
           >
             <CircleX className="h-5 w-5 mr-1" />
-            <span className="text-sm mr-1">Reject</span>
+            <span className="text-sm mr-1">拒绝</span>
           </button>
         </>
       ) : (
@@ -59,15 +59,15 @@ const ApprovalButtons: React.FC<ApprovalButtonsProps> = ({
               className="bg-green-500 hover:bg-green-600 text-white rounded flex justify-center items-center px-2 py-1.5 transition duration-300"
             >
               <CircleCheckBig className="h-5 w-5 mr-1" />
-              <span className="text-sm mr-1">Accept Plan</span>
+              <span className="text-sm mr-1">接受计划</span>
             </button>
             <button
               type="button"
               onClick={onRegeneratePlan}
-              className="bg-magenta-800 hover:bg-magenta-900 text-white rounded flex justify-center items-center px-2 py-1.5 transition duration-300"
+              className="bg-[var(--color-bg-accent)] hover:brightness-90 text-white rounded flex justify-center items-center px-2 py-1.5 transition duration-300" // Use theme accent color
             >
               <RotateCw className="h-5 w-5 mr-1" />
-              <span className="text-sm mr-1">Generate New Plan</span>
+              <span className="text-sm mr-1">生成新计划</span>
             </button>
           </div>
         )

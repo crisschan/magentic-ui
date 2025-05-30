@@ -49,16 +49,16 @@ const NotFoundPage: React.FC<PageProps> = () => {
   return (
     <main style={containerStyle}>
       <h1 style={headingStyle}>404</h1>
-      <h2 style={subheadingStyle}>Page Not Found</h2>
+      <h2 style={subheadingStyle}>页面未找到</h2> {/* Translated */}
       <p style={textStyle}>
-        Sorry, we couldn't find the page you're looking for. The page might have been moved, deleted, or never existed.
+        抱歉，我们找不到您要查找的页面。该页面可能已被移动、删除或从未存在。 {/* Translated */}
       </p>
       <Link to="/" style={linkStyle} onMouseOver={(e) => {
         e.currentTarget.style.backgroundColor = "#0069d9";
       }} onMouseOut={(e) => {
         e.currentTarget.style.backgroundColor = "#007bff";
       }}>
-        Return to Home
+        返回首页 {/* Translated */}
       </Link>
     </main>
   )
@@ -66,4 +66,4 @@ const NotFoundPage: React.FC<PageProps> = () => {
 
 export default NotFoundPage
 
-export const Head: HeadFC = () => <title>Page Not Found | Magentic-UI </title>
+export const Head: HeadFC = () => <title>页面未找到 | Magentic-UI </title> /* Translated */

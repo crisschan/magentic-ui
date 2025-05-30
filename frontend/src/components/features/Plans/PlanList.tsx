@@ -24,7 +24,7 @@ interface PlanListProps {
 const normalizePlanData = (
   planData: any,
   userId: string,
-  defaultTask: string = "Untitled",
+  defaultTask: string = "未命名", // Translated
   preserveId: boolean = false // Add this parameter
 ): Partial<IPlan> => {
   return {
@@ -34,7 +34,7 @@ const normalizePlanData = (
     task: planData.task || defaultTask,
     steps: Array.isArray(planData.steps)
       ? planData.steps.map((step: any) => ({
-          title: step.title || "Untitled Step",
+          title: step.title || "未命名步骤", // Translated
           details: step.details || "",
           enabled: step.enabled !== false,
           open: step.open || false,
@@ -71,7 +71,7 @@ const PlanList: React.FC<PlanListProps> = ({
       const response = await planAPI.listPlans(userId);
 
       const validatedPlans: IPlan[] = response.map(
-        (plan) => normalizePlanData(plan, userId, "Untitled", true) as IPlan // preserve ID
+        (plan) => normalizePlanData(plan, userId, "未命名", true) as IPlan // Translated
       );
 
       setPlans(validatedPlans);
@@ -90,13 +90,13 @@ const PlanList: React.FC<PlanListProps> = ({
       fetchPlans();
     } else {
       setLoading(false);
-      setError("Please sign in to view your plans");
+      setError("请登录以查看您的计划");
     }
   }, [user?.email]);
 
   const handleDeletePlan = (planId: number) => {
     setPlans((prevPlans) => prevPlans.filter((plan) => plan.id !== planId));
-    message.success("Plan deleted successfully");
+    message.success("计划删除成功");
   };
 
   const handlePlanSaved = (updatedPlan: IPlan) => {
@@ -110,7 +110,7 @@ const PlanList: React.FC<PlanListProps> = ({
   const handleUsePlan = async (plan: IPlan) => {
     try {
       message.loading({
-        content: "Creating new session from plan...",
+        content: "正在从计划创建新会话…",
         key: "sessionCreation",
       });
 
@@ -132,7 +132,7 @@ const PlanList: React.FC<PlanListProps> = ({
     } catch (error) {
       console.error("Error using plan:", error);
       message.error({
-        content: "Error creating session",
+        content: "创建会话出错",
         key: "sessionCreation",
       });
     }
@@ -143,21 +143,21 @@ const PlanList: React.FC<PlanListProps> = ({
       setIsCreatingPlan(true);
 
       const newPlan = normalizePlanData(
-        { task: "New Plan", steps: [] },
+        { task: "新计划", steps: [] }, // Translated
         userId
       );
 
       const response = await planAPI.createPlan(newPlan, userId);
 
       if (response && response.id) {
-        message.success("New plan created successfully");
+        message.success("新计划创建成功");
         setNewPlanId(response.id); // Store the new plan ID
         fetchPlans(); // Refresh the list to include the new plan
       }
     } catch (err) {
       console.error("Error creating new plan:", err);
       message.error(
-        `Failed to create plan: ${
+        `创建计划失败：${ // Translated
           err instanceof Error ? err.message : String(err)
         }`
       );
@@ -176,7 +176,7 @@ const PlanList: React.FC<PlanListProps> = ({
       } catch (parseError) {
         message.error({
           content:
-            "Invalid JSON file format. Please check your file and try again.",
+            "无效的JSON文件格式。请检查您的文件并重试。", // Translated
           duration: 5,
         });
         return;
@@ -185,24 +185,24 @@ const PlanList: React.FC<PlanListProps> = ({
       if (!planData || typeof planData !== "object") {
         message.error({
           content:
-            "Invalid plan format. The file does not contain a valid plan structure.",
+            "无效的计划格式。文件不包含有效的计划结构。", // Translated
           duration: 5,
         });
         return;
       }
 
-      const newPlan = normalizePlanData(planData, userId, "Imported Plan");
+      const newPlan = normalizePlanData(planData, userId, "导入的计划"); // Translated
 
       const response = await planAPI.createPlan(newPlan, userId);
 
       if (response && response.id) {
-        message.success("Plan imported successfully");
+        message.success("计划导入成功");
         fetchPlans(); // Refresh to get the new plan with its ID
       }
     } catch (err) {
       console.error("Error importing plan:", err);
       message.error({
-        content: `Failed to import plan: ${
+        content: `导入计划失败：${ // Translated
           err instanceof Error ? err.message : String(err)
         }`,
         duration: 5,
@@ -241,7 +241,7 @@ const PlanList: React.FC<PlanListProps> = ({
       if (file.type === "application/json" || file.name.endsWith(".json")) {
         handleImportPlan(file);
       } else {
-        message.error("Please upload a JSON file");
+        message.error("请上传JSON文件");
       }
     }
   };
@@ -254,7 +254,7 @@ const PlanList: React.FC<PlanListProps> = ({
   if (loading) {
     return (
       <div className="flex items-center justify-center h-full">
-        <Spin size="large" tip="Loading plans..." />
+        <Spin size="large" tip="加载计划中…" />
       </div>
     );
   }
@@ -264,10 +264,10 @@ const PlanList: React.FC<PlanListProps> = ({
       <div className="text-center p-8 text-red-500">
         <p>{error}</p>
         <button
-          className="mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-primary/80"
+          className="mt-4 px-4 py-2 bg-[var(--color-bg-accent)] text-white rounded hover:brightness-90" // Changed to use accent color
           onClick={() => window.location.reload()}
         >
-          Retry
+          重试
         </button>
       </div>
     );
@@ -303,33 +303,33 @@ const PlanList: React.FC<PlanListProps> = ({
           }}
         >
           <div className="text-xl font-semibold text-primary">
-            Drop your plan file here to import
+            在此拖放您的计划文件以导入
           </div>
         </div>
       )}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Your Saved Plans</h1>
+        <h1 className="text-2xl font-bold">您保存的计划</h1>
         <div className="flex items-center gap-2 w-1/3">
-          <Tooltip title="Create a new empty plan">
+          <Tooltip title="创建一个新的空计划">
             <Button
               icon={<PlusOutlined />}
               onClick={handleCreatePlan}
               className="flex items-center"
             >
-              Create
+              创建
             </Button>
           </Tooltip>
-          <Tooltip title="Import a plan from a JSON file">
+          <Tooltip title="从JSON文件导入计划">
             <Button
               icon={<UploadOutlined />}
               onClick={() => fileInputRef.current?.click()}
               className="flex items-center"
             >
-              Import
+              导入
             </Button>
           </Tooltip>
           <Input
-            placeholder="Search plans..."
+            placeholder="搜索计划…"
             prefix={<SearchOutlined className="text-primary" />}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -365,18 +365,18 @@ const PlanList: React.FC<PlanListProps> = ({
             <SearchOutlined
               style={{ fontSize: "48px", marginBottom: "16px" }}
             />
-            <p>No plans found matching "{searchTerm}"</p>
+            <p>未找到与 "{searchTerm}" 匹配的计划</p>
             <Button
               type="link"
               onClick={() => setSearchTerm("")}
               className="mt-2"
             >
-              Clear search
+              清除搜索
             </Button>
           </div>
         ) : (
           <div className="col-span-3 flex flex-col items-center justify-center py-12 text-primary">
-            <p>No plans yet. Create one or import an existing plan.</p>
+            <p>尚无计划。创建一个或导入现有计划。</p>
           </div>
         )}
       </div>

@@ -20,7 +20,7 @@ const BrowserModal: React.FC<BrowserModalProps> = (props) => {
     isOpen,
     onClose,
     novncPort,
-    title = "Browser View",
+    title = "浏览器视图", // Translated
     onPause,
     runStatus,
     onControlHandover,
@@ -75,7 +75,7 @@ const BrowserModal: React.FC<BrowserModalProps> = (props) => {
         className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75"
         style={{ zIndex: 100 }}
       >
-        <div className="bg-tertiary rounded-lg shadow-xl w-[95vw] h-[95vh] flex flex-col">
+        <div className="bg-tertiary rounded-lg w-[95vw] h-[95vh] flex flex-col"> {/* Removed shadow-xl */}
           {/* Header - Modified to use grid approach */}
           <div className="grid grid-cols-3 items-center px-6 py-3 border-b border-primary/20">
             {/* Left column */}
@@ -90,10 +90,10 @@ const BrowserModal: React.FC<BrowserModalProps> = (props) => {
                   type="primary"
                   block
                   onClick={handleGiveBackControl}
-                  className="font-medium shadow-md flex justify-center items-center"
+                  className="font-medium flex justify-center items-center" /* Removed shadow-md */
                   size="large"
                 >
-                  Give control back to Magentic-UI 
+                  将控制权交还给Magentic-UI 
                 </Button>
               )}
             </div>
@@ -102,7 +102,7 @@ const BrowserModal: React.FC<BrowserModalProps> = (props) => {
             <div className="flex justify-end">
               <button
                 onClick={onClose}
-                className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                className="p-1 hover:bg-[var(--color-bg-light)] rounded-full transition-colors" /* Use theme hover */
               >
                 <X size={20} />
               </button>

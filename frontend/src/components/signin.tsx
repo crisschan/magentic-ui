@@ -22,7 +22,7 @@ const SignInModal = ({ isVisible, onClose }: SignInModalProps) => {
   const handleSignIn = () => {
     const trimmedEmail = email.trim();
     if (!trimmedEmail) {
-      message.error("Username cannot be empty");
+      message.error("用户名不能为空");
       return;
     }
     setUser({ ...user, email: trimmedEmail, name: trimmedEmail });
@@ -39,15 +39,15 @@ const SignInModal = ({ isVisible, onClose }: SignInModalProps) => {
       onCancel={isAlreadySignedIn ? onClose : undefined}
     >
       <span className="text-lg">
-        Enter a username.<br></br> A change of username will create a new profile.
+        请输入用户名。<br></br> 更改用户名将会创建一个新的个人资料。
       </span>
       <div className="mb-4">
         <Input
           type="text"
-          placeholder="Enter a username"
+          placeholder="输入用户名"
           value={email}
           onChange={handleEmailChange}
-          className="shadow-sm"
+          // className="shadow-sm" // Removed shadow-sm
         />
       </div>
       <div className="flex justify-center">
@@ -55,7 +55,7 @@ const SignInModal = ({ isVisible, onClose }: SignInModalProps) => {
           type="primary"
           onClick={handleSignIn}
         >
-          Sign In
+          登录
         </Button>
       </div>
     </Modal>

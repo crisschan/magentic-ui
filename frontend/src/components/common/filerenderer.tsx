@@ -187,8 +187,8 @@ const FileModal: React.FC<FileModalProps> = ({
     if (isLoading) {
       return (
         <div className="flex flex-col items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-          <p className="mt-4 text-gray-600">Loading file content...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--color-border-accent)]"></div> {/* Use theme accent border */}
+          <p className="mt-4 text-[var(--color-text-secondary)]">Loading file content...</p> {/* Use theme text secondary */}
         </div>
       );
     }
@@ -257,7 +257,7 @@ const FileModal: React.FC<FileModalProps> = ({
     >
       <div
         ref={modalRef}
-        className={`bg-white rounded-lg shadow-lg overflow-hidden ${
+        className={`bg-white rounded-lg overflow-hidden ${ // Removed shadow-lg
           isFullScreen ? "fixed inset-0" : "max-w-4xl w-full max-h-[85vh]"
         }`}
       >
@@ -337,22 +337,22 @@ const ImageThumbnail = memo<{ file: FileInfo }>(({ file }) => {
 
   if (isLoading) {
     return (
-      <div className="w-full h-20 flex items-center justify-center bg-gray-50">
-        <div className="animate-pulse bg-gray-200 w-8 h-8 rounded"></div>
+      <div className="w-full h-20 flex items-center justify-center bg-[var(--color-bg-secondary)]"> {/* Use theme secondary bg */}
+        <div className="animate-pulse bg-[var(--color-bg-tertiary)] w-8 h-8 rounded"></div> {/* Use theme tertiary bg */}
       </div>
     );
   }
 
   if (hasError) {
     return (
-      <div className="w-full h-20 flex items-center justify-center bg-gray-50">
-        <ImageIcon className="w-8 h-8 text-blue-500" />
+      <div className="w-full h-20 flex items-center justify-center bg-[var(--color-bg-secondary)]"> {/* Use theme secondary bg */}
+        <ImageIcon className="w-8 h-8 text-[var(--color-text-accent)]" /> {/* Use theme accent text */}
       </div>
     );
   }
 
   return (
-    <div className="w-full h-20 bg-gray-50 flex items-center justify-center overflow-hidden">
+    <div className="w-full h-20 bg-[var(--color-bg-secondary)] flex items-center justify-center overflow-hidden"> {/* Use theme secondary bg */}
       <img
         src={thumbnailUrl}
         alt={file.name}
@@ -387,7 +387,7 @@ const DownloadButton = memo<{ file: FileInfo }>(({ file }) => {
   return (
     <button
       onClick={handleDownload}
-      className="absolute top-2 right-2 p-1.5 rounded-full bg-white/90 hover:bg-white shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+      className="absolute top-2 right-2 p-1.5 rounded-full bg-white/90 hover:bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-200" // Removed shadow-md
       title="Download file"
     >
       <Download size={16} className="text-gray-700" />
@@ -404,11 +404,11 @@ const FileCard = memo<FileCardProps>(({ file, onFileClick }) => {
   if (file.type === "image") {
     return (
       <div
-        className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 hover:border-blue-500 shadow-sm hover:shadow-md cursor-pointer transition-all"
+        className="group relative flex flex-col overflow-hidden rounded-lg border border-[var(--color-border-secondary)] hover:border-[var(--color-border-accent)] cursor-pointer transition-all" // Updated border colors
         onClick={() => onFileClick(file)}
       >
         <ImageThumbnail file={file} />
-        <div className="p-2 bg-white border-t w-full">
+        <div className="p-2 bg-white border-t w-full"> {/* bg-white for card part is fine */}
           <span className="text-xs truncate w-full block" title={file.name}>
             {file.name}
           </span>
@@ -420,10 +420,10 @@ const FileCard = memo<FileCardProps>(({ file, onFileClick }) => {
 
   return (
     <div
-      className="group relative flex flex-col items-center p-3 rounded-lg border border-gray-200 hover:border-blue-500 cursor-pointer transition-colors shadow-sm hover:shadow-md"
+      className="group relative flex flex-col items-center p-3 rounded-lg border border-[var(--color-border-secondary)] hover:border-[var(--color-border-accent)] cursor-pointer transition-colors" // Updated border colors
       onClick={() => onFileClick(file)}
     >
-      <IconComponent className="w-8 h-8 mb-2 text-blue-500" />
+      <IconComponent className="w-8 h-8 mb-2 text-[var(--color-text-accent)]" /> {/* Use theme accent text */}
       <span className="text-xs text-center truncate w-full" title={file.name}>
         {file.name}
       </span>

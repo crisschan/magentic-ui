@@ -18,11 +18,9 @@ const RelevantPlans: React.FC<RelevantPlansProps> = ({
   if (isSearching) {
     return (
       <div
-        className={`text-xs text-opacity-70 ml-2 mb-1 ${
-          darkMode === "dark" ? "text-gray-400" : "text-gray-500"
-        }`}
+        className={`text-xs text-opacity-70 ml-2 mb-1 text-[var(--color-text-secondary)]`} // Use theme color
       >
-        Finding relevant plans...
+        正在查找相关计划…
       </div>
     );
   }
@@ -35,9 +33,9 @@ const RelevantPlans: React.FC<RelevantPlansProps> = ({
     <div
       className={`ml-2 mb-1 ${
         darkMode === "dark"
-          ? "bg-[#333333] border border-gray-700"
-          : "bg-white border border-gray-200"
-      } rounded-md shadow-md absolute z-10 max-w-xl`}
+          ? "bg-[var(--color-bg-secondary)] border border-[var(--color-border-secondary)]" // Theme colors for dark mode
+          : "bg-white border border-[var(--color-border-secondary)]" // Theme border for light mode
+      } rounded-md absolute z-10 max-w-xl`} // Removed shadow-md
       style={{
         maxHeight: "300px",
         bottom: "100%", // Position above the input
@@ -48,11 +46,11 @@ const RelevantPlans: React.FC<RelevantPlansProps> = ({
       <div
         className={`py-2 px-4 font-medium text-sm border-b ${
           darkMode === "dark"
-            ? "border-gray-700 bg-gray-800"
-            : "border-gray-200 bg-gray-50"
+            ? "border-[var(--color-border-secondary)] bg-[var(--color-bg-tertiary)]" // Theme colors for dark mode
+            : "border-[var(--color-border-secondary)] bg-[var(--color-bg-light)]" // Theme colors for light mode
         }`}
       >
-        Found relevant plans:
+        找到相关计划：
       </div>
 
       {/* Plans list */}
@@ -62,25 +60,19 @@ const RelevantPlans: React.FC<RelevantPlansProps> = ({
         renderItem={(plan) => (
           <List.Item
             onClick={() => onUsePlan(plan)}
-            className={`cursor-pointer hover:${
-              darkMode === "dark" ? "bg-gray-700" : "bg-gray-100"
-            } px-4 py-2 border-b ${
-              darkMode === "dark" ? "border-gray-700" : "border-gray-100"
-            } last:border-b-0`}
+            className={`cursor-pointer hover:bg-[var(--color-bg-light)] px-4 py-2 border-b border-[var(--color-border-secondary)] last:border-b-0`} // Theme colors for hover and border
           >
             <div className="flex items-center justify-between w-full">
               <div className="flex-1 overflow-hidden text-left">
                 <div className="text-sm font-normal truncate">{plan.task}</div>
-                <div className="text-xs text-gray-500">
-                  {plan.steps?.length || 0} steps
+                <div className="text-xs text-[var(--color-text-secondary)]"> {/* Theme color for steps text */}
+                  {plan.steps?.length || 0} 个步骤
                 </div>
               </div>
-              <Tooltip title="Attach Plan to query">
+              <Tooltip title="将计划附加到查询">
                 <div className="ml-3 flex-shrink-0">
                   <PlayCircleIcon
-                    className={`h-5 w-5 ${
-                      darkMode === "dark" ? "text-blue-400" : "text-blue-500"
-                    } hover:scale-110 transition-transform cursor-pointer`}
+                    className={`h-5 w-5 text-[var(--color-text-accent)] hover:scale-110 transition-transform cursor-pointer`} // Theme accent color for icon
                   />
                 </div>
               </Tooltip>

@@ -31,18 +31,18 @@
 }
 
 .light {
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f1e9f1;
+  --color-bg-primary: #f0f2f5; /* Light Gray */
+  --color-bg-secondary: #f8f9fa; /* Lighter Gray */
   --color-bg-light: #f9fafb;
   --color-bg-tertiary: #f3f6f9;
   --color-bg-opposite: #2a2a2a;
   --color-bg-white: #ffffff;
   --color-bg-dark: #1a1a1a;
-  --color-bg-accent: #444444;
-  --color-text-primary: #000000;
-  --color-text-secondary: #4a5568;
-  --color-text-accent: #444444;
-  --color-border-primary: #e2e8f0;
+  --color-bg-accent: #0078d4; /* Using a calm blue for accent */
+  --color-text-primary: #212529; /* Darker Gray for text */
+  --color-text-secondary: #495057; /* Slightly lighter gray for secondary text */
+  --color-text-accent: #0078d4; /* Blue for accent text */
+  --color-border-primary: #d3dce6; /* Lighter border color */
   --color-border-secondary: #edf2f7;
   --color-border-accent: #444444;
   --color-warning-primary: #F6A147;
@@ -102,7 +102,8 @@ body {
   padding: 0px 64px 0px 64px;
   @apply px-4 md:px-8 lg:px-16 w-full !important;
   margin: 0px auto;
-  background: transparent;
+  background-color: var(--color-bg-primary); /* Use the new primary background */
+  color: var(--color-text-primary); /* Use the new primary text color */
   /* border: 2px solid green; */
   width: 100%;
   height: 100%;
@@ -149,15 +150,15 @@ body {
   @apply border-accent !important;
 }
 .ant-slider-handle:hover {
-  @apply border-accent brightness-75 !important;
+  @apply border-accent !important; /* Removed brightness-75 */
 }
 
 .ant-switch-checked {
   @apply bg-accent !important;
 }
 .ant-switch {
-  background-color: #3a3a3a;
-  border: grey;
+  background-color: var(--color-bg-tertiary); /* Use theme variable */
+  border-color: var(--color-border-primary); /* Use theme variable */
 }
 
 /* .ant-modal-content {
@@ -266,21 +267,7 @@ a:hover {
 .scroll::-webkit-scrollbar-thumb {
   @apply bg-accent;
   border-radius: 20px;
-  border: 3px solid rgb(214, 214, 214);
-}
-
-.dark .scroll-gradient {
-}
-
-.light .scroll-gradient {
-}
-
-.scroll-gradient {
-  position: sticky;
-  top: 0;
-  height: 15px;
-  z-index: 2; /* Above the content but below the scrollbar */
-  pointer-events: none; /* So it doesn't block interaction with the content */
+  /* border: 3px solid rgb(214, 214, 214); */ /* Removed for flatter scrollbar */
 }
 
 .vega-embed {
@@ -355,7 +342,7 @@ a:hover {
   @apply bg-accent text-white !important;
 }
 .ant-btn-primary:hover {
-  @apply bg-accent text-white drop-shadow-md !important;
+  @apply bg-accent text-white !important; /* Removed drop-shadow */
 }
 .ant-modal-close {
   @apply text-primary   duration-200   !important;

@@ -194,9 +194,9 @@ const ChatInput = React.forwardRef<{ focus: () => void }, ChatInputProps>(
               setFileList((prev) => [...prev, uploadFile]);
 
               // Show successful paste notification
-              message.success(`Image pasted successfully`);
+              message.success(`图片粘贴成功`);
             } else if (file && file.size > MAX_FILE_SIZE) {
-              message.error(`Pasted image is too large. Maximum size is 5MB.`);
+              message.error(`粘贴的图片过大。最大限制为5MB。`);
             }
           }
 
@@ -254,12 +254,12 @@ const ChatInput = React.forwardRef<{ focus: () => void }, ChatInputProps>(
                 notificationApi.info({
                   message: (
                     <span className="text-sm">
-                      Large Text Converted to File
+                      大量文本已转换为文件
                     </span>
                   ),
                   description: (
                     <span className="text-sm text-secondary">
-                      Your pasted text has been attached as a file.
+                      您粘贴的文本已作为文件附件。
                     </span>
                   ),
                   duration: 3,
@@ -431,18 +431,17 @@ const ChatInput = React.forwardRef<{ focus: () => void }, ChatInputProps>(
     const handleFileValidationAndAdd = (file: File): boolean => {
       // Check file size
       if (file.size > MAX_FILE_SIZE) {
-        message.error(`${file.name} is too large. Maximum size is 5MB.`);
+        message.error(`${file.name} 文件过大。最大限制为5MB。`);
         return false;
       }
 
       // Check file type
       if (!ALLOWED_FILE_TYPES.includes(file.type)) {
         notificationApi.warning({
-          message: <span className="text-sm">Unsupported File Type</span>,
+          message: <span className="text-sm">不支持的文件类型</span>,
           description: (
             <span className="text-sm text-secondary">
-              Please upload only text (.txt) or images (.jpg, .png, .gif, .svg)
-              files.
+              请仅上传文本 (.txt) 或图片 (.jpg, .png, .gif, .svg) 文件。
             </span>
           ),
           duration: 8.5,
@@ -594,7 +593,7 @@ const ChatInput = React.forwardRef<{ focus: () => void }, ChatInputProps>(
         {(attachedPlan || fileList.length > 0) && (
           <div
             className={`-mb-2 mx-1 ${
-              darkMode === "dark" ? "bg-[#333333]" : "bg-gray-100"
+              darkMode === "dark" ? "bg-[var(--color-bg-secondary)]" : "bg-[var(--color-bg-secondary)]"
             } rounded-t border-b-0 p-2 flex border flex-wrap gap-2`}
           >
             {/* Attached Plan */}
@@ -602,8 +601,8 @@ const ChatInput = React.forwardRef<{ focus: () => void }, ChatInputProps>(
               <div
                 className={`flex items-center gap-1 ${
                   darkMode === "dark"
-                    ? "bg-[#444444] text-white"
-                    : "bg-white text-black"
+                    ? "bg-[var(--color-bg-tertiary)] text-white"
+                    : "bg-white text-[var(--color-text-primary)]"
                 } rounded px-2 py-1 text-xs cursor-pointer hover:opacity-80 transition-opacity`}
                 onClick={handlePlanClick}
               >
@@ -629,8 +628,8 @@ const ChatInput = React.forwardRef<{ focus: () => void }, ChatInputProps>(
                 key={file.uid}
                 className={`flex items-center gap-1 ${
                   darkMode === "dark"
-                    ? "bg-[#444444] text-white"
-                    : "bg-white text-black"
+                    ? "bg-[var(--color-bg-tertiary)] text-white"
+                    : "bg-white text-[var(--color-text-primary)]"
                 } rounded px-2 py-1 text-xs`}
               >
                 {getFileIcon(file)}
@@ -653,7 +652,7 @@ const ChatInput = React.forwardRef<{ focus: () => void }, ChatInputProps>(
 
         {/* Plan View Modal */}
         <Modal
-          title={`Plan: ${attachedPlan?.task || "Untitled Plan"}`}
+          title={`计划：${attachedPlan?.task || "未命名计划"}`}
           open={isPlanModalVisible}
           onCancel={handlePlanModalClose}
           footer={null}
@@ -670,7 +669,7 @@ const ChatInput = React.forwardRef<{ focus: () => void }, ChatInputProps>(
           )}
         </Modal>
 
-        <div className="mt-2 rounded shadow-sm flex">
+        <div className="mt-2 rounded flex"> {/* Removed shadow-sm */}
           <div
             className={`flex w-full ${dragOver ? "opacity-50" : ""}`}
             onDragOver={handleDragOver}
@@ -695,8 +694,8 @@ const ChatInput = React.forwardRef<{ focus: () => void }, ChatInputProps>(
                     onKeyDown={handleKeyDown}
                     className={`flex items-center w-full resize-none border-l border-t border-b border-accent p-2 pl-5 rounded-l-lg ${
                       darkMode === "dark"
-                        ? "bg-[#444444] text-white"
-                        : "bg-white text-black"
+                        ? "bg-[var(--color-bg-tertiary)] text-white"
+                        : "bg-white text-[var(--color-text-primary)]"
                     } ${
                       isInputDisabled ? "cursor-not-allowed" : ""
                     } focus:outline-none`}
@@ -707,12 +706,12 @@ const ChatInput = React.forwardRef<{ focus: () => void }, ChatInputProps>(
                     }}
                     placeholder={
                       runStatus === "awaiting_input"
-                        ? "Type your response here and let Magentic-UI know of any changes in the browser."
+                        ? "在此输入您的回复，并告知Magentic-UI在浏览器中所做的任何更改。"
                         : enable_upload
                         ? dragOver
-                          ? "Drop files here..."
-                          : "Type your message here..."
-                        : "Type your message here..."
+                          ? "在此拖放文件…"
+                          : "在此输入您的消息…"
+                        : "在此输入您的消息…"
                     }
                     disabled={isInputDisabled}
                   />
@@ -722,8 +721,8 @@ const ChatInput = React.forwardRef<{ focus: () => void }, ChatInputProps>(
               <div
                 className={`flex items-center justify-center gap-2 border-t border-r border-b border-accent px-2 rounded-r-lg ${
                   darkMode === "dark"
-                    ? "bg-[#444444] text-white"
-                    : "bg-white text-black"
+                    ? "bg-[var(--color-bg-tertiary)] text-white"
+                    : "bg-white text-[var(--color-text-primary)]"
                 }`}
               >
                 {/* File upload button replaced with Dropdown */}
@@ -738,13 +737,13 @@ const ChatInput = React.forwardRef<{ focus: () => void }, ChatInputProps>(
                         <Menu>
                           <Menu.Item key="attach-file">
                             <Upload {...uploadProps} showUploadList={false}>
-                              <span>Attach File</span>
+                              <span>附加文件</span>
                             </Upload>
                           </Menu.Item>
-                          <Menu.SubMenu key="attach-plan" title="Attach Plan">
+                          <Menu.SubMenu key="attach-plan" title="附加计划">
                             {allPlans.length === 0 ? (
                               <Menu.Item disabled key="no-plans">
-                                No plans available
+                                无可用计划
                               </Menu.Item>
                             ) : (
                               allPlans.map((plan: any) => (
@@ -763,7 +762,7 @@ const ChatInput = React.forwardRef<{ focus: () => void }, ChatInputProps>(
                     >
                       <Tooltip
                         title={
-                          <span className="text-sm">Attach File or Plan</span>
+                          <span className="text-sm">附加文件或计划</span>
                         }
                         placement="top"
                       >
@@ -783,7 +782,7 @@ const ChatInput = React.forwardRef<{ focus: () => void }, ChatInputProps>(
                   <button
                     type="button"
                     onClick={handlePause}
-                    className="bg-magenta-800 hover:bg-magenta-900 text-white rounded flex justify-center items-center w-11 h-9 transition duration-300"
+                    className="bg-[var(--color-bg-accent)] hover:brightness-90 text-white rounded flex justify-center items-center w-11 h-9 transition duration-300"
                   >
                     <PauseCircleIcon className="h-6 w-6" />
                   </button>
@@ -793,10 +792,10 @@ const ChatInput = React.forwardRef<{ focus: () => void }, ChatInputProps>(
                     type="button"
                     onClick={handleSubmit}
                     disabled={isInputDisabled}
-                    className={`bg-magenta-800 transition duration-300 rounded flex justify-center items-center w-11 h-9 ${
+                    className={`bg-[var(--color-bg-accent)] transition duration-300 rounded flex justify-center items-center w-11 h-9 ${
                       isInputDisabled
                         ? "cursor-not-allowed"
-                        : "hover:bg-magenta-900"
+                        : "hover:brightness-90"
                     }`}
                   >
                     <PaperAirplaneIcon className="h-6 w-6 text-white" />
@@ -808,8 +807,8 @@ const ChatInput = React.forwardRef<{ focus: () => void }, ChatInputProps>(
         </div>
 
         {error && !error.status && (
-          <div className="p-2 border rounded mt-4 text-orange-500 text-sm">
-            <ExclamationTriangleIcon className="h-5 text-orange-500 inline-block mr-2" />
+          <div className="p-2 border rounded mt-4 text-[var(--color-warning-primary)] text-sm">
+            <ExclamationTriangleIcon className="h-5 text-[var(--color-warning-primary)] inline-block mr-2" />
             {error.message}
           </div>
         )}

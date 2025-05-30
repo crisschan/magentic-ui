@@ -38,7 +38,7 @@ export const LearnPlanButton: React.FC<LearnPlanButtonProps> = ({
 
   const handleLearnPlan = async () => {
     if (!sessionId || !effectiveUserId) {
-      message.error("Missing session or user information");
+      message.error("缺少会话或用户信息");
       return;
     }
 
@@ -46,7 +46,7 @@ export const LearnPlanButton: React.FC<LearnPlanButtonProps> = ({
       setIsLearning(true);
       setError(null);
       message.loading({
-        content: "Creating plan from conversation...",
+        content: "正在从对话创建计划…",
         key: "learnPlan",
       });
 
@@ -54,7 +54,7 @@ export const LearnPlanButton: React.FC<LearnPlanButtonProps> = ({
 
       if (response && response.status) {
         message.success({
-          content: "Plan created successfully!",
+          content: "计划创建成功！",
           key: "learnPlan",
           duration: 2,
         });
@@ -71,14 +71,14 @@ export const LearnPlanButton: React.FC<LearnPlanButtonProps> = ({
         learnedPlans[`${sessionId}-${messageId}`] = true;
         localStorage.setItem("learned_plans", JSON.stringify(learnedPlans));
       } else {
-        throw new Error(response?.message || "Failed to create plan");
+        throw new Error(response?.message || "创建计划失败");
       }
     } catch (error) {
       console.error("Error creating plan:", error);
-      setError(error instanceof Error ? error.message : "Unknown error");
+      setError(error instanceof Error ? error.message : "未知错误");
       message.error({
-        content: `Failed to create plan: ${
-          error instanceof Error ? error.message : "Unknown error"
+        content: `创建计划失败：${
+          error instanceof Error ? error.message : "未知错误"
         }`,
         key: "learnPlan",
       });
@@ -90,7 +90,7 @@ export const LearnPlanButton: React.FC<LearnPlanButtonProps> = ({
   // If already learned, show success message
   if (isLearned) {
     return (
-      <Tooltip title="This plan has been saved to your library">
+      <Tooltip title="此计划已保存到您的库中">
         <div
           className={`inline-flex items-center px-3 py-1.5 rounded-md ${
             darkMode === "dark"
@@ -99,7 +99,7 @@ export const LearnPlanButton: React.FC<LearnPlanButtonProps> = ({
           }`}
         >
           <CheckCircleIcon className="h-4 w-4 mr-1.5" />
-          <span className="text-sm font-medium">Plan Learned</span>
+          <span className="text-sm font-medium">计划已学习</span>
         </div>
       </Tooltip>
     );
@@ -108,17 +108,17 @@ export const LearnPlanButton: React.FC<LearnPlanButtonProps> = ({
   // If learning, show spinner
   if (isLearning) {
     return (
-      <Tooltip title="Creating a plan from this conversation">
+      <Tooltip title="正在从此对话创建计划">
         <button
           disabled
           className={`inline-flex items-center px-3 py-1.5 rounded-md transition-colors ${
             darkMode === "dark"
-              ? "bg-blue-800/30 text-blue-400 border border-blue-700"
-              : "bg-blue-100 text-blue-800 border border-blue-200"
+              ? "bg-[var(--color-bg-accent)]/10 text-[var(--color-text-accent)]/50 border border-[var(--color-border-accent)]/30" // Dark mode learning state with theme colors
+              : "bg-[var(--color-bg-accent)]/10 text-[var(--color-text-accent)]/50 border border-[var(--color-border-accent)]/30" // Light mode learning state with theme colors
           } cursor-wait`}
         >
           <Spin size="small" className="mr-2" />
-          <span className="text-sm font-medium">Learning Plan...</span>
+          <span className="text-sm font-medium">学习计划中…</span>
         </button>
       </Tooltip>
     );
@@ -126,14 +126,14 @@ export const LearnPlanButton: React.FC<LearnPlanButtonProps> = ({
 
   // Default state - ready to learn
   return (
-    <Tooltip title="Learn a reusable plan from this conversation and save it to your library">
+    <Tooltip title="从此对话中学习可重用计划并将其保存到您的库中">
       <button
         onClick={handleLearnPlan}
         disabled={!sessionId || !effectiveUserId}
         className={`inline-flex items-center px-3 py-1.5 rounded-md transition-colors ${
           darkMode === "dark"
-            ? "bg-blue-700/20 text-blue-400 border border-blue-400/50 hover:bg-blue-700/30 hover:border-blue-700"
-            : "bg-blue-400 text-blue-800 border border-blue-200 hover:bg-blue-100 hover:border-blue-300"
+            ? "bg-transparent text-[var(--color-text-accent)] border border-[var(--color-border-accent)] hover:bg-[var(--color-bg-accent)]/20" // Dark mode default state with theme colors
+            : "bg-transparent text-[var(--color-text-accent)] border border-[var(--color-border-accent)] hover:bg-[var(--color-bg-accent)]/10" // Light mode default state with theme colors
         } ${
           !sessionId || !effectiveUserId
             ? "opacity-50 cursor-not-allowed"
@@ -141,11 +141,9 @@ export const LearnPlanButton: React.FC<LearnPlanButtonProps> = ({
         }`}
       >
         <LightBulbIcon
-          className={`h-4 w-4 mr-1.5 ${
-            darkMode === "dark" ? "text-blue-400" : "text-blue-800"
-          }`}
+          className={`h-4 w-4 mr-1.5 text-[var(--color-text-accent)]`} // Use theme accent color for icon
         />
-        <span className="text-sm font-medium">Learn Plan</span>
+        <span className="text-sm font-medium">学习计划</span>
       </button>
     </Tooltip>
   );

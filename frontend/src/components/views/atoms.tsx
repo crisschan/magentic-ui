@@ -82,9 +82,10 @@ export const TruncatableText = memo(
           `}
         >
           {displayContent}
+          {/* Gradient removed for flatter design: 
           {shouldTruncate && !isExpanded && (
             <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-secondary/20 to-transparent" />
-          )}
+          )} */}
         </div>
 
         {shouldTruncate && (
@@ -191,7 +192,7 @@ const FullScreenImage: React.FC<{
           className={`
             max-h-[90vh] max-w-[90vw] 
             object-contain rounded-lg 
-            shadow-2xl
+            // shadow-2xl // Removed shadow
             ${className}
           `}
         />

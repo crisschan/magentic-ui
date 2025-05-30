@@ -96,17 +96,17 @@ const getStepIcon = (
   is_step_failed?: boolean
 ) => {
   if (is_step_failed)
-    return <AlertTriangle size={16} className="text-magenta-800" />;
+    return <AlertTriangle size={16} className="text-[var(--color-text-accent)]" />; // Theme accent or warning
   if (is_step_repeated)
-    return <AlertTriangle size={16} className="text-magenta-800" />;
+    return <AlertTriangle size={16} className="text-[var(--color-text-accent)]" />; // Theme accent or warning
   if (status === "completed")
-    return <CheckCircle size={16} className="text-magenta-800" />;
+    return <CheckCircle size={16} className="text-[var(--color-text-accent)]" />; // Theme accent or success
   if (status === "current" && runStatus === "active")
-    return <RefreshCw size={16} className="text-magenta-800 animate-spin" />;
+    return <RefreshCw size={16} className="text-[var(--color-text-accent)] animate-spin" />; // Theme accent
   if (status === "upcoming")
-    return <Clock size={16} className="text-gray-400" />;
+    return <Clock size={16} className="text-[var(--color-text-secondary)]" />; // Theme secondary text
   if (status === "failed")
-    return <AlertTriangle size={16} className="text-magenta-500" />;
+    return <AlertTriangle size={16} className="text-[var(--color-text-accent)]" />; // Theme accent or warning
   return null;
 };
 
@@ -218,7 +218,7 @@ const RenderMultiModalBrowserStep: React.FC<{
               <div className="flex-shrink-0 mr-1 -ml-1 mt-2">
                 <Globe2
                   size={16}
-                  className="text-magenta-800 hover:text-magenta-900 cursor-pointer"
+                  className="text-[var(--color-text-accent)] hover:brightness-90 cursor-pointer" // Theme accent
                   onClick={() => onImageClick?.(index)}
                 />
               </div>
@@ -383,7 +383,7 @@ const RenderStepExecution: React.FC<RenderStepExecutionProps> = memo(
             </div>
           )}
         <div
-          className={`relative border-2 border-transparent hover:border-gray-300 rounded-lg p-2 cursor-pointer overflow-hidden bg-secondary`}
+          className={`relative border-2 border-transparent hover:border-[var(--color-border-accent)] rounded-lg p-2 cursor-pointer overflow-hidden bg-secondary`} // Theme hover border
           onClick={handleToggle}
         >
           <div className="flex items-center w-full">
@@ -407,7 +407,7 @@ const RenderStepExecution: React.FC<RenderStepExecutionProps> = memo(
             </button>
             <div className="flex-1 mx-2">
               <div className="font-semibold text-primary">
-                Step {content.index + 1}: {content.title}
+                步骤 {content.index + 1}：{content.title}
               </div>
             </div>
             <div className="flex-none">
@@ -443,7 +443,7 @@ const RenderFinalAnswer: React.FC<RenderFinalAnswerProps> = memo(
     return (
       <div className="border-2 border-secondary rounded-lg p-4">
         <div className="flex justify-between items-center">
-          <div className="font-semibold text-primary">Final Answer</div>
+          <div className="font-semibold text-primary">最终答案</div>
           <LearnPlanButton
             sessionId={sessionId}
             messageId={messageIdx}

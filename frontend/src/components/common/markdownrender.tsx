@@ -100,13 +100,13 @@ const CodeBlock: React.FC<{ language: string; value: string }> = ({
           {copied ? "Copied!" : "Copy"}
         </button>
       </div>
-      <div style={{ backgroundColor: "#000" }}>
+      <div style={{ backgroundColor: "var(--color-bg-dark)" }}> {/* Use theme variable */}
         <SyntaxHighlighter
           style={tomorrow}
           language={language || "text"}
           PreTag="div"
           customStyle={{
-            backgroundColor: "#000",
+            backgroundColor: "var(--color-bg-dark)", // Use theme variable
             margin: 0,
             borderBottomLeftRadius: "0.375rem",
             borderBottomRightRadius: "0.375rem",

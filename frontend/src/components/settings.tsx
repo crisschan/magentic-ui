@@ -46,8 +46,8 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ isOpen, onClose }) => {
   const MODEL_OPTIONS = [
     { value: "gpt-4.1-2025-04-14", label: "OpenAI GPT-4.1" },
     { value: "gpt-4.1-mini-2025-04-14", label: "OpenAI GPT-4.1 Mini" },
-    { value: "azure-ai-foundry", label: "Azure AI Foundry Template" },
-    { value: "ollama", label: "Ollama (Local)" },
+    { value: "azure-ai-foundry", label: "Azure AI Foundry 模板" }, // Translated
+    { value: "ollama", label: "Ollama (本地)" }, // Translated
     { value: "openrouter", label: "OpenRouter" },
     { value: "gpt-4.1-nano-2025-04-14", label: "OpenAI GPT-4.1 Nano" },
     { value: "o4-mini-2025-04-16", label: "OpenAI O4 Mini" },
@@ -208,7 +208,7 @@ action_guard_client: *client
     // Check if allowedlist is enabled but no websites are added
     if (allowedlistEnabled && cachedWebsites.length === 0) {
       setValidationWarning(
-        "You must add at least one website to the Allowed Websites list or turn off this feature"
+        "您必须在允许的网站列表中添加至少一个网站，或关闭此功能" // Translated
       );
       return;
     }
@@ -228,7 +228,7 @@ action_guard_client: *client
     );
     if (!hasAllClients) {
       message.error(
-        "YAML must include all required model clients: " +
+        "YAML 必须包含所有必需的模型客户端：" + // Translated
           requiredClients.join(", ")
       );
       return false;
@@ -243,15 +243,15 @@ action_guard_client: *client
         const content = e.target?.result as string;
         if (validateYamlConfig(content)) {
           handleUpdateConfig({ model_configs: content });
-          message.success("YAML configuration imported successfully");
+          message.success("YAML 配置导入成功"); // Translated
         }
       };
       reader.onerror = () => {
-        message.error("Failed to read the YAML file");
+        message.error("读取 YAML 文件失败"); // Translated
       };
       reader.readAsText(file);
     } catch (error) {
-      message.error("Failed to import YAML configuration");
+      message.error("导入 YAML 配置失败"); // Translated
       console.error("Error importing YAML:", error);
     }
     return false; // Prevent default upload behavior
@@ -261,27 +261,27 @@ action_guard_client: *client
     try {
       if (modelName === "azure-ai-foundry") {
         handleUpdateConfig({ model_configs: AZURE_AI_FOUNDRY_YAML });
-        message.success("Azure AI Foundry configuration applied");
+        message.success("Azure AI Foundry 配置已应用"); // Translated
         return;
       }
       if (modelName === "openrouter") {
         handleUpdateConfig({ model_configs: OPENROUTER_YAML });
-        message.success("OpenRouter configuration applied");
+        message.success("OpenRouter 配置已应用"); // Translated
         return;
       }
       if (modelName === "ollama") {
         handleUpdateConfig({ model_configs: OLLAMA_YAML });
-        message.success("Ollama configuration applied");
+        message.success("Ollama 配置已应用"); // Translated
         return;
       }
       // For OpenAI models, reset YAML to default with only client and selected model
       handleUpdateConfig({
         model_configs: generateOpenAIModelConfig(modelName),
       });
-      message.success("OpenAI model configuration applied");
+      message.success("OpenAI 模型配置已应用"); // Translated
     } catch (error) {
       console.error("Error updating model in config:", error);
-      message.error("Failed to update model configuration");
+      message.error("更新模型配置失败"); // Translated
     }
   };
 
@@ -298,13 +298,12 @@ action_guard_client: *client
             )}
             {hasChanges && (
               <div className="text-secondary text-sm italic">
-                Warning: Settings changes will only apply when you create a new
-                session
+                警告：设置更改仅在创建新会话时生效
               </div>
             )}
             <div className="flex gap-2 justify-end">
               <Button key="reset" onClick={handleResetDefaults}>
-                Reset to Defaults
+                恢复默认设置
               </Button>
             </div>
           </div>,
@@ -317,13 +316,13 @@ action_guard_client: *client
             items={[
               {
                 key: "general",
-                label: "General",
+                label: "通用", // Translated
                 children: (
                   <div className="space-y-6 px-4">
                     {/* Dark Mode Toggle */}
                     <div className="flex items-center justify-between">
                       <span className="text-primary">
-                        {darkMode === "dark" ? "Dark Mode" : "Light Mode"}
+                        {darkMode === "dark" ? "深色模式" : "浅色模式"} 
                       </span>
                       <button
                         onClick={() =>
@@ -345,8 +344,8 @@ action_guard_client: *client
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <span className="flex items-center gap-2">
-                          Action Approval Policy
-                          <Tooltip title="Controls when approval is required before taking actions">
+                          操作审批策略 
+                          <Tooltip title="控制何时在执行操作前需要审批">
                             <InfoCircleOutlined className="text-secondary hover:text-primary cursor-help" />
                           </Tooltip>
                         </span>
@@ -357,14 +356,14 @@ action_guard_client: *client
                           }
                           style={{ width: 200 }}
                           options={[
-                            { value: "never", label: "Never require approval" },
+                            { value: "never", label: "从不要求批准" },
                             {
                               value: "auto-conservative",
-                              label: "AI based judgement",
+                              label: "基于AI判断",
                             },
                             {
                               value: "always",
-                              label: "Always require approval",
+                              label: "总是要求批准",
                             },
                           ]}
                         />
@@ -375,16 +374,16 @@ action_guard_client: *client
                       <div className="space-y-4">
                         <div className="flex items-center justify-between">
                           <span className="flex items-center gap-2">
-                            Allowed Websites List
-                            <Tooltip title="When enabled, Magentic-UI will only be able to visit websites you add to the list below.s">
+                            允许的网站列表
+                            <Tooltip title="启用后，Magentic-UI 将只能访问您添加到下面列表中的网站。">
                               <InfoCircleOutlined className="text-secondary hover:text-primary cursor-help" />
                             </Tooltip>
                           </span>
                           {cachedWebsites.length === 0 && (
                             <Switch
                               checked={allowedlistEnabled}
-                              checkedChildren="Restricted to List"
-                              unCheckedChildren="All Websites Allowed"
+                              checkedChildren="仅限列表"
+                              unCheckedChildren="允许所有网站"
                               onChange={(checked) => {
                                 setAllowedlistEnabled(checked);
                                 if (!checked) {
@@ -414,7 +413,7 @@ action_guard_client: *client
                                   icon={<Plus size={16} />}
                                   onClick={addWebsite}
                                 >
-                                  Add
+                                  添加
                                 </Button>
                               </div>
                               <div>
@@ -447,20 +446,20 @@ action_guard_client: *client
               },
               {
                 key: "advanced",
-                label: "Advanced",
+                label: "高级", // Translated
                 children: (
                   <div className="space-y-4 px-4">
                     <div className="flex items-center justify-between">
                       <span className="flex items-center gap-2">
-                        Allow Replans
-                        <Tooltip title="When enabled, Magentic-UI will automatically replan if the current plan is not working or you change the original request">
+                        允许重新规划
+                        <Tooltip title="启用后，如果当前计划无效或您更改了原始请求，Magentic-UI 将自动重新规划">
                           <InfoCircleOutlined className="text-secondary hover:text-primary cursor-help" />
                         </Tooltip>
                       </span>
                       <Switch
                         checked={config.allow_for_replans}
-                        checkedChildren="ON"
-                        unCheckedChildren="OFF"
+                        checkedChildren="开" 
+                        unCheckedChildren="关" 
                         onChange={(checked) =>
                           handleUpdateConfig({ allow_for_replans: checked })
                         }
@@ -486,8 +485,8 @@ action_guard_client: *client
                     */}
                     <div className="flex items-center justify-between">
                       <span className="flex items-center gap-2">
-                        Retrieve Relevant Plans
-                        <Tooltip title="Controls how Magentic-UI retrieves and uses relevant plans from previous sessions">
+                        检索相关计划
+                        <Tooltip title="控制 Magentic-UI 如何从先前的会话中检索和使用相关计划">
                           <InfoCircleOutlined className="text-secondary hover:text-primary cursor-help" />
                         </Tooltip>
                       </span>
@@ -501,24 +500,24 @@ action_guard_client: *client
                           {
                             value: "never",
                             label: (
-                              <Tooltip title="No plan retrieval">
-                                No plan retrieval
+                              <Tooltip title="不检索计划">
+                                不检索计划
                               </Tooltip>
                             ),
                           },
                           {
                             value: "hint",
                             label: (
-                              <Tooltip title="Retrieve most relevant saved plan as hints for new plans">
-                                Retrieve plans as hints
+                              <Tooltip title="检索最相关的已保存计划作为新计划的提示">
+                                检索计划作为提示
                               </Tooltip>
                             ),
                           },
                           {
                             value: "reuse",
                             label: (
-                              <Tooltip title="Retrieve most relevant saved plan to be used directly">
-                                Retrieve plans to use directly
+                              <Tooltip title="检索最相关的已保存计划以供直接使用">
+                                直接检索计划使用
                               </Tooltip>
                             ),
                           },
@@ -530,38 +529,30 @@ action_guard_client: *client
               },
               {
                 key: "model",
-                label: "Model Configuration",
+                label: "模型配置", // Translated
                 children: (
                   <div className="space-y-4 px-4">
                     <div className="flex flex-col gap-2">
                       <div className="flex items-center justify-between">
                         <span className="flex items-center gap-2">
-                          Model Configuration
+                          模型配置 
                           <Tooltip
                             title={
                               <>
                                 <p>
-                                  YAML configuration for the underlying LLM of
-                                  the agents.{" "}
+                                  代理底层LLM的YAML配置。
                                 </p>
                                 <p>
-                                  {" "}
-                                  The configuration uses AutoGen
-                                  ChatCompletionClient format.
+                                  该配置使用AutoGen ChatCompletionClient格式。
                                 </p>
                                 <p>
-                                  Must include configurations for:
-                                  orchestrator_client, coder_client,
-                                  web_surfer_client, and file_surfer_client.
+                                  必须包括以下客户端的配置：orchestrator_client, coder_client, web_surfer_client, 和 file_surfer_client。
                                 </p>
                                 <p>
-                                  Each client should follow the AutoGen
-                                  ChatCompletionClient specification with
-                                  provider, config (model, etc), and
-                                  max_retries.
+                                  每个客户端都应遵循AutoGen ChatCompletionClient规范，包括provider, config (模型等), 和 max_retries。
                                 </p>
                                 <p>
-                                  Changes require a new session to take effect.
+                                  更改需要新会话才能生效。
                                 </p>
                               </>
                             }
@@ -574,7 +565,7 @@ action_guard_client: *client
                           showUploadList={false}
                           beforeUpload={handleYamlFileUpload}
                         >
-                          <Button icon={<UploadOutlined />}>Import YAML</Button>
+                          <Button icon={<UploadOutlined />}>导入 YAML</Button>
                         </Upload>
                       </div>
 
@@ -582,9 +573,9 @@ action_guard_client: *client
                         <div className="flex-grow">
                           <div className="flex items-center gap-2 mb-1">
                             <span className="text-sm">
-                              Select LLM for All Clients
+                              为所有客户端选择LLM
                             </span>
-                            <Tooltip title="This will update the model configuration for all agent clients (orchestrator, coder, web surfer, and file surfer)">
+                            <Tooltip title="这将为所有代理客户端（orchestrator, coder, web surfer, 和 file surfer）更新模型配置">
                               <InfoCircleOutlined className="text-primary hover:text-primary cursor-help" />
                             </Tooltip>
                           </div>
@@ -594,7 +585,7 @@ action_guard_client: *client
                             onChange={(value: string) =>
                               updateModelInConfig(value)
                             }
-                            placeholder="Select model to use for all clients"
+                            placeholder="选择要用于所有客户端的模型"
                           />
                         </div>
                       </div>
@@ -603,7 +594,7 @@ action_guard_client: *client
 
                       <div>
                         <div className="text-sm mb-1">
-                          Advanced Configuration (YAML)
+                          高级配置 (YAML)
                         </div>
                         <MonacoEditor
                           value={config.model_configs}

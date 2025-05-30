@@ -141,7 +141,7 @@ const DetailViewer: React.FC<DetailViewerProps> = ({
             <div className="relative flex-1 flex items-center justify-center overflow-y-auto">
               <div className="w-full h-full flex flex-col items-center justify-center">
                 {/* Pill navigation overlay */}
-                <div className="absolute border top-4 left-1/2 transform -translate-x-1/2 z-10 bg-secondary rounded-full px-3 py-1 flex items-center justify-center gap-4 shadow-md">
+                <div className="absolute border top-4 left-1/2 transform -translate-x-1/2 z-10 bg-secondary rounded-full px-3 py-1 flex items-center justify-center gap-4"> {/* Removed shadow-md */}
                   <button
                     onClick={handlePrevious}
                     className="text-primary hover:text-opacity-80 transition-colors"
@@ -235,7 +235,7 @@ const DetailViewer: React.FC<DetailViewerProps> = ({
   return (
     <>
       <div
-        className="bg-tertiary rounded-lg shadow-lg p-4 h-full flex flex-col relative overflow-hidden"
+        className="bg-tertiary rounded-lg p-4 h-full flex flex-col relative overflow-hidden" // Removed shadow-lg
         id={detailViewerContainerId}
       >
         {/* Tabs and Controls */}
@@ -265,14 +265,14 @@ const DetailViewer: React.FC<DetailViewerProps> = ({
 
           <div className="flex gap-2">
             {isControlMode && (
-              <div className="flex items-center gap-2 px-2 rounded-2xl bg-magenta-800 text-white">
+              <div className="flex items-center gap-2 px-2 rounded-2xl bg-[var(--color-bg-accent)] text-white"> {/* Use theme accent color */}
                 <MousePointerClick size={16} />
                 <span>You have control</span>
               </div>
             )}
             <button
               onClick={handleMaximizeClick}
-              className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+              className="p-1 hover:bg-[var(--color-bg-light)] rounded-full transition-colors" // Use theme hover
               title="Open in full screen"
             >
               <Maximize2 size={20} />
@@ -280,7 +280,7 @@ const DetailViewer: React.FC<DetailViewerProps> = ({
             {!isControlMode && (
               <button
                 onClick={onMinimize}
-                className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                className="p-1 hover:bg-[var(--color-bg-light)] rounded-full transition-colors" // Use theme hover
               >
                 <X size={20} />
               </button>

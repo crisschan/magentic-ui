@@ -58,7 +58,7 @@ interface PlanProps {
 }
 
 const PlanView: React.FC<PlanProps> = ({
-  task = "Untitled",
+  task = "未命名", // Translated default
   fromMemory = false,
   plan,
   setPlan,
@@ -154,9 +154,9 @@ const PlanView: React.FC<PlanProps> = ({
         <div className="flex items-center mb-2">
           <ClipboardList className="h-5 w-5 mr-2 flex-shrink-0" />
           {fromMemory
-            ? "Potentially relevant plan retrieved from memory. "
-            : "Here's a plan. "}
-          <span> You can edit it directly or through the chat.</span>
+            ? "已从内存中检索到可能相关的计划。"
+            : "这是一个计划。"}
+          <span> 您可以直接编辑或通过聊天编辑。</span>
         </div>
       )}
       <div className="rounded-none border-[var(--color-border-primary)]">
@@ -166,7 +166,7 @@ const PlanView: React.FC<PlanProps> = ({
             // onClick={() => setIsCollapsed(false)}
           >
             <ClipboardList className="h-5 w-5 mr-2 flex-shrink-0" />
-            <h2 className="line-through">Plan for: {task}</h2>
+            <h2 className="line-through">计划：{task}</h2>
           </div>
         ) : (
           <>
@@ -180,7 +180,7 @@ const PlanView: React.FC<PlanProps> = ({
                   {viewOnly && (
                     <ClipboardList className="h-5 w-5 mr-2 flex-shrink-0" />
                   )}
-                  <h2 className="">Plan for: {task}</h2>
+                  <h2 className="">计划：{task}</h2>
                 </div>
                 {/* {viewOnly && (
                   <button
@@ -218,7 +218,7 @@ const PlanView: React.FC<PlanProps> = ({
                                   !viewOnly ? "cursor-grab" : ""
                                 }`}
                               >
-                                Step {index + 1}
+                                步骤 {index + 1}
                               </span>
                             </div>
                             <div className="border-transparent p-1  px-2 mt-2.5 flex-1 rounded">
@@ -234,7 +234,7 @@ const PlanView: React.FC<PlanProps> = ({
                                     autoFocus
                                     className={`flex-1 p-2 min-w-[100px] max-w-full resize-y bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] rounded ${
                                       !item.details.trim()
-                                        ? "border border-orange-300"
+                                        ? "border border-[var(--color-warning-primary)]" // Use theme warning color
                                         : ""
                                     } ${
                                       viewOnly
@@ -242,7 +242,7 @@ const PlanView: React.FC<PlanProps> = ({
                                         : ""
                                     }`}
                                     readOnly={viewOnly}
-                                    placeholder="Enter step details"
+                                    placeholder="输入步骤详情"
                                   />
                                 }
                                 {!viewOnly && (
@@ -275,16 +275,16 @@ const PlanView: React.FC<PlanProps> = ({
               <div className="mt-2 p-0 flex justify-end">
                 <div className="flex gap-4 items-center">
                   <span className="mt-1 text-[var(--color-text-secondary)] px-2">
-                    {saveStatus === "saving" && "Saving..."}
+                    {saveStatus === "saving" && "保存中…"}
                     {saveStatus === "saved" && ""}
-                    {saveStatus === "error" && "Error saving changes"}
+                    {saveStatus === "error" && "保存更改出错"}
                   </span>
                   <div
                     onClick={addLocalPlan}
                     className="mt-2 flex items-center text-[var(--color-text-secondary)] px-4 rounded hover:text-[var(--color-text-primary)] cursor-pointer"
                   >
                     <PlusIcon className="h-5 w-5 mr-2" />
-                    Add Step
+                    添加步骤
                   </div>
                 </div>
               </div>

@@ -5,7 +5,7 @@ import { graphql } from "gatsby";
 // markup
 const IndexPage = ({ data }: any) => {
   return (
-    <MagenticUILayout meta={data.site.siteMetadata} title="Home" link={"/"}>
+    <MagenticUILayout meta={data.site.siteMetadata} title="主页" link={"/"}>
       <main style={{ height: "100%" }} className=" h-full ">
       </main>
     </MagenticUILayout>

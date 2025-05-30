@@ -33,7 +33,7 @@ const ContentHeader = ({
         {/* Left side: Text and Sidebar Controls */}
         <div className="flex items-center">
           {/* Sidebar Toggle */}
-          <Tooltip title={isSidebarOpen ? "Close Sidebar" : "Open Sidebar"}>
+          <Tooltip title={isSidebarOpen ? "关闭侧边栏" : "打开侧边栏"}>
             <Button
               variant="tertiary"
               size="sm"
@@ -52,7 +52,7 @@ const ContentHeader = ({
           {/* New Session Button */}
           <div className="w-[40px]">
             {!isSidebarOpen && (
-              <Tooltip title="Create new session">
+              <Tooltip title="创建新会话">
                 <Button
                   variant="tertiary"
                   size="sm"
@@ -64,7 +64,7 @@ const ContentHeader = ({
             )}
           </div>
           <div className="flex items-center space-x-2">
-            <img src={logo} alt="Magentic-UI Logo" className="h-10 w-10" />
+            <img src={logo} alt="Magentic-UI 标志" className="h-10 w-10" />
             <div className="text-primary text-2xl font-bold">Magentic-UI</div>
           </div>
         </div>
@@ -73,7 +73,7 @@ const ContentHeader = ({
         <div className="flex items-center space-x-4">
           {/* User Profile */}
           {user && (
-            <Tooltip title="View or update your profile">
+            <Tooltip title="查看或更新您的个人资料">
               <div
                 className="flex items-center space-x-2 cursor-pointer"
                 onClick={() => setIsEmailModalOpen(true)}
@@ -85,7 +85,7 @@ const ContentHeader = ({
                     alt={user.name}
                   />
                 ) : (
-                  <div className="bg-blue-400 h-8 w-8 rounded-full flex items-center justify-center text-gray-800 font-semibold hover:text-message">
+                  <div className="bg-[var(--color-bg-accent)] h-8 w-8 rounded-full flex items-center justify-center text-white font-semibold hover:text-message"> {/* Changed to theme accent bg and white text */}
                     {user.name?.[0]}
                   </div>
                 )}
@@ -95,14 +95,14 @@ const ContentHeader = ({
 
           {/* Settings Button */}
           <div className="text-primary">
-            <Tooltip title="Settings">
+            <Tooltip title="设置">
               <Button
                 variant="tertiary"
                 size="sm"
                 icon={<Settings className="h-8 w-8" />}
                 onClick={() => setIsSettingsOpen(true)}
                 className="!px-0 transition-colors hover:text-accent"
-                aria-label="Settings"
+                aria-label="设置"
               />
             </Tooltip>
           </div>
